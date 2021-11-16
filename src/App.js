@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         Welcome, galvanize to your React app for sdi07-02!
       </header>
-      <p>The Test of Tests</p>
+      <p>The Test of Tests again</p>
     </div>
   );
 }
