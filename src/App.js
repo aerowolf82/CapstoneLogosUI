@@ -5,13 +5,13 @@ import './App.css';
 
 import { useContext } from "react";
 import { AppContext } from "./AppContext.js";
-  import { BrowserRouter as Router } from 'react-router-dom';
-  import AppProvider from './AppContext';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppProvider from './AppContext';
 
 
 function App() {
-  
-  // const { list } = useContext(AppContext); import database from AppContext here
+
+  const { appList, setAppList, user, setUser } = useContext(AppContext); //import database from AppContext here
 
   return (
     <AppProvider>
@@ -26,13 +26,13 @@ function App() {
             hamburger button drop-down or profile logo button
               <link> for profile page
               <link> to admin panel - based on isAdmin
-          
+
           <div> for constellation image? and p1 logo
             background constellation css
             p1 logo
             terminus logo
             "Single Source for Platform One Apps"
-          
+
           Switch (Routes??)
           Route for profile page
             <UserProfile>
