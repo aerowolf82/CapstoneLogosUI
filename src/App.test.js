@@ -8,6 +8,12 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+//App.js tests:
+//carousel tests
+
+//grid tests
+
+//AppCard.js:
 //it('opens a modal on click')
 
 //describe Home page
