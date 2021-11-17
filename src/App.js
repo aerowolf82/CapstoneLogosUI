@@ -1,33 +1,60 @@
 import React from 'react';
 import './App.css';
-//useState, reactrouterdom, all mui things
+//useState, useEffect, react-router-dom, all mui things
+//useContext? ... ContextSource and ContextProvider for favorites and "your apps"  --last step
+
+import { useContext } from "react";
+import { AppContext } from "./AppContext.js";
+  import { BrowserRouter as Router } from 'react-router-dom';
+  import AppProvider from './AppContext';
+
 
 function App() {
-  //useState activeApps
-  //useState inactiveApps
+  
+  // const { list } = useContext(AppContext); import database from AppContext here
 
   return (
-    //React Router
-    //Home page displayed by default
-    //<navbar>
-      //<grogu>
-      //<Greeting>
-      //<search bar>
-      //<link> for profile page
-    
-    //<div> for constellation image and p1 logo?????
-
-    //Route for profile page
-
-    //<Active applications> (full color/carousel)
-    //<inactive applications> (grey)
-    <div className="App">
-      <header className="App-header">
-        Welcome, galvanize to your React app for sdi07-02!
-      </header>
-      <p>The Test of Tests again</p>
-    </div>
+    <AppProvider>
+      <React.StrictMode>
+        <Router>
+          {/* Home page displayed by default
+          <navbar>
+            <grogu>
+            <Site title>
+            <Greeting>
+            <search bar> link to line 12
+            hamburger button drop-down or profile logo button
+              <link> for profile page
+              <link> to admin panel - based on isAdmin
+          
+          <div> for constellation image? and p1 logo
+            background constellation css
+            p1 logo
+            terminus logo
+            "Single Source for Platform One Apps"
+          
+          Switch (Routes??)
+          Route for profile page
+            <UserProfile>
+          Route for publish page
+            <Admin>
+          <Active applications> (full color/carousel)
+          grid
+            <all applications> */}
+          <div className="App">
+            <header className="App-header">
+              Welcome to Terminus!
+            </header>
+            <p>The Test of Tests again</p>
+            <br></br>
+          </div>
+        </Router>
+      </React.StrictMode>
+    </AppProvider>
   );
 }
 
 export default App;
+
+
+

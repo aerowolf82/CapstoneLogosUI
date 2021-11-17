@@ -1,2 +1,0 @@
-//function declaration - props
-//export
