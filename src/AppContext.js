@@ -8,9 +8,9 @@ function importAll(r) {
   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
   return images;
 }
-
-const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
-console.log(images)
+// fails to render because of this
+// const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+// console.log(images)
 
 export const AppContext = createContext(null);
 
@@ -22,7 +22,7 @@ function AppProvider({ children }) {
     { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon_url: `./images/Jira.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
     { name: `Confluence`, description: `Collaboration platform`, url: `https://confluence.il2.dso.mil/#all-updates`, icon_url: `./images/confluence.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
     { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon_url: `./images/gitlab.svg`, role: '/Platform One/Party Bus/IL2/IL2-Gitlab' },
-    { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon_url: `./images/Iron_Bank.svg`, role: '' },
+    { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon_url: `./images/Iron_Bank.svg`, role: '' }
 
   ]);
   //full list of Apps in database (this is an array of objects of all apps)

@@ -19,6 +19,7 @@
     "test:unit": "react-scripts test --coverage --watchAll=false",
     "lint": "./node_modules/.bin/eslint . --ext js,ts,tsx",
     "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "test:e2e": "npx cypress run",
     "test:e2e-ci": "npx cypress run --env configFile=pipeline"
   },

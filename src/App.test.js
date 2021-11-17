@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { useContext } from "react";
+import { AppContext } from "./AppContext.js";
+
+const { appList, setAppList, user, setUser } = useContext(AppContext);
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -10,7 +14,19 @@ it('renders without crashing', () => {
 
 //App.js tests:
 //carousel tests
+it('renders a Slider object', () => {
+  ReactDOM.render(<App />);
+  expect(document.getElementById('Slider')).toBeTruthy();
+});
+xit(`shows an app the user has access to`, () => {
+  //const user = {permissions: [access list via token.group_full]}
+  //const appList = AppContext.appList;
+  ReactDOM.render(<App />);
 
+})
+xit(`doesn't show an app the user doesn't have access to`, () => {
+
+})
 //grid tests
 
 //AppCard.js:

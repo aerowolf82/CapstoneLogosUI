@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
-//useState, useEffect, react-router-dom, all mui things
-//useContext? ... ContextSource and ContextProvider for favorites and "your apps"  --last step
-
 import { useContext } from "react";
 import { AppContext } from "./AppContext.js";
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppProvider from './AppContext';
+//import Slider from '@bit/akiran.react-slick.slider';
 
 
 function App() {
@@ -38,16 +36,27 @@ function App() {
             <UserProfile>
           Route for publish page
             <Admin>
-          <Active applications> (full color/carousel)
+          <Active applications> (full color/carousel https://bit.dev/akiran/react-slick/slider)
           grid
             <all applications> */}
-          <div className="App">
+          {/* <div className="App">
             <header className="App-header">
               Welcome to Terminus!
             </header>
             <p>The Test of Tests again</p>
             <br></br>
-          </div>
+            <Slider {...settings}>
+              <div>
+                <h3>hello</h3>
+              </div>
+              <div>
+                <h3>2</h3>
+              </div>
+              <div>
+                <h3>3</h3>
+              </div>
+            </Slider>
+          </div> */}
         </Router>
       </React.StrictMode>
     </AppProvider>
