@@ -21,7 +21,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState, useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "../AppContext.js";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,7 +38,14 @@ export default function RecipeReviewCard(appObj) {
 
   const [expanded, setExpanded] = useState(false);
 
-  const { favorites, isFav, setIsFav, addFavorite, removeFavorite } = useContext(AppContext);
+  const {
+    appList,
+    setAppList,
+    user,
+    setUser,
+    activeApps,
+    setActiveApps
+  } = useContext(AppContext);
 
   let pokemonObj = pokeObj.pokemon;
   let spritesUrl = pokemonObj.sprites.front_default;
