@@ -3,15 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
+    "@mui/styled-engine": "^5.1.1",
+    "@mui/styles": "^5.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "babel": "^6.23.0",
+    "babel-plugin-require-context-hook": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-material-ui-carousel": "^3.0.4",
     "react-router-dom": "^6.0.2",
     "react-scripts": "^4.0.3",
     "web-vitals": "^1.0.1"
   },
+  "setupFiles": [
+    ".jest/register-context.js"
+  ],
   "scripts": {
     "install_force_resolution": "npx npm-force-resolutions && npm install",
     "start": "react-scripts start",
@@ -19,6 +31,7 @@
     "test:unit": "react-scripts test --coverage --watchAll=false",
     "lint": "./node_modules/.bin/eslint . --ext js,ts,tsx",
     "eject": "react-scripts eject",
+    "test": "react-scripts test",
     "test:e2e": "npx cypress run",
     "test:e2e-ci": "npx cypress run --env configFile=pipeline"
   },

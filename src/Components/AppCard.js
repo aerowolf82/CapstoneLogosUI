@@ -1,16 +1,9 @@
 //function declaration - props
 //export
 
-//could just be a list of all apps from the database's table 
+//could just be a list of all apps from the database's table
 
 //modal with description and information, and a note saying contact devs for access
-
-
-
-
-
-
-
 
 import * as React from "react";
 import { styled } from "@mui/material/styles";
@@ -28,7 +21,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState, useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { AppContext } from "../AppContext.js";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -41,95 +34,104 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-  export default function RecipeReviewCard(appObj) {
+export default function RecipeReviewCard(appObj) {
 
-    const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-    const { favorites, isFav, setIsFav, addFavorite, removeFavorite } = useContext(AppContext);
-    
-    let pokemonObj= pokeObj.pokemon;
-    let spritesUrl= pokemonObj.sprites.front_default;
-    let pokeName = pokemonObj.name;
-      pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
-    let pokeId = pokemonObj.id;
-    let pokeMoves = [];
-    for (let e=0; e < pokemonObj.moves.length; e++) {
-      pokeMoves.push(pokemonObj.moves[e].move.name);
+  const {
+    appList,
+    setAppList,
+    user,
+    setUser,
+    activeApps,
+    setActiveApps
+  } = useContext(AppContext);
+
+  let pokemonObj = pokeObj.pokemon;
+  let spritesUrl = pokemonObj.sprites.front_default;
+  let pokeName = pokemonObj.name;
+  pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
+  let pokeId = pokemonObj.id;
+  let pokeMoves = [];
+  for (let e = 0; e < pokemonObj.moves.length; e++) {
+    pokeMoves.push(pokemonObj.moves[e].move.name);
+  }
+  let pokeType = pokemonObj.types[0].type.name;
+  let pokeWeight = pokemonObj.weight;
+  let pokeHeight = pokemonObj.height;
+
+  let dataObj = {
+    sprite: spritesUrl,
+    name: pokeName,
+    id: pokeId,
+    moves: pokeMoves,
+    type: pokeType,
+    weight: pokeWeight,
+    height: pokeHeight,
+  };
+
+  if (dataObj.id < 10) {
+    dataObj.id = `0` + `${dataObj.id}`;
+  }
+  if (dataObj.id < 100) {
+    dataObj.id = `0` + `${dataObj.id}`;
+  }
+
+  function handleChange() {
+    if (favorites.some(e => e.name === pokemonObj.name)) {
+      removeFavorite(pokemonObj);
+    } else {
+      addFavorite(pokemonObj);
     }
-    let pokeType = pokemonObj.types[0].type.name;
-    let pokeWeight = pokemonObj.weight;
-    let pokeHeight = pokemonObj.height;
+  }
 
-    let dataObj = {
-      sprite: spritesUrl,
-      name: pokeName,
-      id: pokeId,
-      moves: pokeMoves,
-      type: pokeType,
-      weight: pokeWeight,
-      height: pokeHeight,
-    };
+  function handleExpandClick() {
+    setExpanded(!expanded);
+  };
 
-    if (dataObj.id < 10) {
-      dataObj.id = `0` + `${dataObj.id}`;
-    }
-    if (dataObj.id < 100) {
-      dataObj.id = `0` + `${dataObj.id}`;
-    }
+  // let permissions = user.group_full
 
-    function handleChange(){
-      if (favorites.some(e => e.name === pokemonObj.name)) {
-        removeFavorite(pokemonObj);
-      } else {
-        addFavorite(pokemonObj);
-      }
-    }
-
-    function handleExpandClick() {
-      setExpanded(!expanded);
-    };
-
-    return (
-      <Card sx={{ maxWidth: 345 }}>
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[200] }} aria-label="recipe">
-              {dataObj.id}
-            </Avatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={`${dataObj.name}`}
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${dataObj.id}.png`}
-          alt="Pokemon Image"
-        />
-        <CardContent>
-          <></>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            onClick={() => handleChange()}
-            aria-label="add to favorites">
-            <FavoriteIcon style={{ color: ( isFav.includes(pokemonObj.name) ) ?"pink" : "lightgray" }} />          
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[200] }} aria-label="recipe">
+            {dataObj.id}
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
           </IconButton>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+        }
+        title={`${dataObj.name}`}
+      />
+      <CardMedia
+        component="img"
+        height="194"
+        image={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${dataObj.id}.png`}
+        alt="Pokemon Image"
+      />
+      <CardContent>
+        <></>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          onClick={() => handleChange()}
+          aria-label="add to favorites">
+          <FavoriteIcon style={{ color: (isFav.includes(pokemonObj.name)) ? "pink" : "lightgray" }} />
+        </IconButton>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
           <Typography variant="body2" color="text.secondary">
             {`ID: ${dataObj.id} `}
           </Typography>
@@ -142,16 +144,16 @@ const ExpandMore = styled((props) => {
           <Typography variant="body2" color="text.secondary">
             {`Weight: ${dataObj.weight}`}
           </Typography>
-          <img src={ (dataObj.sprite) } alt="sprite" />
+          <img src={(dataObj.sprite)} alt="sprite" />
           {dataObj.moves.map((move) => (
             <div>
-            {( isFav.includes(pokemonObj.name) ) ?
-              move : null
-            }
+              {(isFav.includes(pokemonObj.name)) ?
+                move : null
+              }
             </div>
           ))}
-          </CardContent>
-        </Collapse>
-      </Card>
-    );
+        </CardContent>
+      </Collapse>
+    </Card>
+  );
 }
