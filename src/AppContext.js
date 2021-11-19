@@ -2,6 +2,16 @@
 import * as React from "react";
 import "./App.css";
 import { useState, useEffect, createContext } from "react";
+import mattermost from './images/MatterMost.svg'
+import iron_bank from './images/Iron_Bank.svg'
+import jira from './images/Jira.svg'
+import confluence from './images/Confluence.svg'
+import confluence_grey from './images/Confluence_Grey.svg'
+import mattermost_grey from './images/Mattermost_Grey.svg'
+import iron_bank_grey from './images/Iron_Bank_Grey.svg'
+import jira_grey from './images/Jira_Grey.svg'
+import terminus from './images/Terminus.svg'
+import terminus_grey from './images/Terminus_Grey.svg'
 
 
 
@@ -46,6 +56,8 @@ function AppProvider({ children }) {
   // const [permissionsList, setPermissionsList] = useState([]);
   const [user, setUser] = useState([]);
   const [activeApps, setActiveApps] = useState([]) //set based on token on load (this is an array including each app object that is active)
+
+
   //   const [isAdmin, setIsAdmin] = useState([])
   //   const [searchTerm, setSearchTerm] = useState([])
   // a favorites or MyApp state?
@@ -74,12 +86,27 @@ function AppProvider({ children }) {
     // }
     // addUser(fakeUserInfo);
     let fakeAppList = [
-      { name: `MatterMost`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon_url: `./images/Mattermost.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
+      { name: `MatterMost`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon_url: `./images/MatterMost.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon_url: `./images/Jira.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `Confluence`, description: `Collaboration platform`, url: `https://confluence.il2.dso.mil/#all-updates`, icon_url: `/static/media/confluence.6de3944b.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon_url: `/static/media/gitlab.08073d5a.svg`, role: '/Platform One/Party Bus/IL2/IL2-Gitlab' },
       { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon_url: `./images/Iron_Bank.svg`, role: '' }
     ]
+
+    // const [appList, setAppList] = useState([
+    //   { name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon: mattermost, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_grey: mattermost_grey, icon_grey_alt: 'mattermost_grey' },
+    //   { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon: jira, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_grey: jira_grey, icon_grey_alt: 'jira_grey' },
+    //   { name: `Confluence`, description: `Collaboration platform`, url: `https://confluence.il2.dso.mil/#all-updates`, icon: confluence, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_grey: confluence_grey, icon_grey_alt: 'confluence_grey' },
+    //   { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon: terminus, role: '/Platform One/Party Bus/IL2/IL2-Gitlab', icon_grey: terminus_grey, icon_grey_alt: 'GitLab_grey' },
+    //   { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon: iron_bank, role: '', icon_grey: iron_bank_grey, icon_grey_alt: 'iron_bank_grey' }
+    // ]);
+  
+    // const [activeApps, setActiveApps] = useState([{ name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon: mattermost, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_grey: mattermost_grey, icon_grey_alt: 'mattermost_grey' },
+    //   { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon: jira, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_grey: jira_grey, icon_grey_alt: 'jira_grey' },
+    //   { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon: terminus, role: '/Platform One/Party Bus/IL2/IL2-Gitlab', icon_grey: terminus_grey, icon_grey_alt: 'GitLab_grey' },
+    //   { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon: iron_bank, role: '', icon_grey: iron_bank_grey, icon_grey_alt: 'iron_bank_grey' }
+    // ])
+
 
 
     function addAppList(fakeAppList) {
@@ -96,7 +123,7 @@ function AppProvider({ children }) {
 
     // async function addActiveApps(fakeActiveApps) {
     let fakeActiveApps = [
-      { name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon_url: `./images/Mattermost.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
+      { name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon_url: `./images/MatterMost.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon_url: `./images/Jira.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `Confluence`, description: `Collaboration platform`, url: `https://confluence.il2.dso.mil/#all-updates`, icon_url: `./images/confluence.svg`, role: '/Platform One/Party Bus/IL2/IL2-Atlassian' },
       { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon_url: `./images/Iron_Bank.svg`, role: '' }

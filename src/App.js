@@ -5,6 +5,19 @@ import { Paper, Button } from '@mui/material'
 import { useContext } from "react";
 import { AppContext } from "./AppContext.js";
 // import { BrowserRouter as Router } from 'react-router-dom';
+import AllApps from "./Components/AllApps.js";
+import { Parallax, Background } from "react-parallax";
+import whitebg from './images/Background_WH.png'
+import constellationbg from './images/Constellation.jpg'
+
+const insideStyles = {
+  background: "transparent",
+  padding: 20,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)",
+};
 
 function Item(props) {
   return (
@@ -54,22 +67,27 @@ function App() {
         Welcome to Terminus!
       </header>
       <br></br>
+      <Parallax
+        bgImage= {constellationbg}
+        bgImageAlt= 'Constellations'
+        strength={600}
+        renderLayer={(percentage) => (
+          <>
+          </>
+        )}
+      >
+        <div style={{ height: 500 }}>
+          <div style={insideStyles}></div>
+        </div>
+      </Parallax>
       <Carousel >
-        {/* <div>
-          <h3>hello</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div> */}
         {
           appList.map((item, i) => <Item key={i} item={item} />)
         }
       </Carousel>
+      <AllApps/>
     </div >
-  );
+  )
 }
 
 export default App;

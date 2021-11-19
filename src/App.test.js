@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { useContext } from "react";
 import AppProvider, { AppContext } from "./AppContext.js";
-
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 // const {
 //   appList,
@@ -24,6 +24,7 @@ xit('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
 
 //App.js tests:
 //carousel tests
@@ -54,9 +55,45 @@ xit(`doesn't show an app the user doesn't have access to`, () => {
 
 
 //grid tests
+describe('Testing the grid', () => {
+
+  const appList = [
+    { name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_alt: 'Mattermost', icon_grey: '', icon_grey_alt: 'Mattermost_grey' },
+    { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_alt: 'Jira', icon_grey: '', icon_grey_alt: 'Jira_grey'  },
+    { name: `Confluence`, description: `Collaboration platform`, url: `https://confluence.il2.dso.mil/#all-updates`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_alt: 'Confluence', icon_grey: '', icon_grey_alt: 'Confluence_grey'  },
+    { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Gitlab', icon_alt: 'GitLab', icon_grey: '', icon_grey_alt: 'GitLab_grey'  },
+    { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon: ``, role: '', icon_alt: 'Iron Bank', icon_grey: '', icon_grey_alt: 'Iron_Bank_grey'  },
+  ];
+
+  const activeApps = [
+    { name: `MatterMost IL2`, description: `IL2 Chat platform`, url: `https://chat.il2.dso.mil/`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_alt: 'Mattermost', icon_grey: '', icon_grey_alt: 'Mattermost_grey' },
+    { name: `Jira`, description: `IL2 Ticket System`, url: `https://jira.il2.dso.mil/secure/Dashboard.jspa`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Atlassian', icon_alt: 'Jira', icon_grey: '', icon_grey_alt: 'Jira_grey'  },
+    { name: `GitLab`, description: `Gitlab for Platform One`, url: `https://code.il2.dso.mil/`, icon: ``, role: '/Platform One/Party Bus/IL2/IL2-Gitlab', icon_alt: 'GitLab', icon_grey: '', icon_grey_alt: 'GitLab_grey'  },
+    { name: `Iron Bank`, description: `Your source for secured container images`, url: `https://ironbank.dso.mil/about`, icon: ``, role: '', icon_alt: 'Iron Bank', icon_grey: '', icon_grey_alt: 'Iron_Bank_grey'  },
+  ]
+
+  const valueObj = {
+    appList,
+    activeApps
+  };
+
+  it('should render icons and titles from our mock data and grey icons if the app is not listed in active app', async () => {
+    render(
+      <AppContext.Provider value={valueObj}>
+        <App />
+      </AppContext.Provider>
+    );
+    let wait = await screen.findByText(/jira/i);
+    expect(screen.getByText(/Mattermost/i)).toBeInTheDocument();
+    expect(screen.getByAltText(/Mattermost/i)).toBeInTheDocument();
+    expect(screen.queryByAltText('Confluence')).not.toBeInTheDocument();
+    expect(screen.getByAltText(/Confluence_grey/i)).toBeInTheDocument();
+  });
+  
+});
+
 
 //AppCard.js:
-//it('opens a modal on click')
 
 //describe Home page
 //it('Displays all Platform One apps', ()=>{})
