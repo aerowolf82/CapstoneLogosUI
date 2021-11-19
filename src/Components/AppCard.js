@@ -1,27 +1,16 @@
-//function declaration - props
-//export
-
-//could just be a list of all apps from the database's table
-
-//modal with description and information, and a note saying contact devs for access
-
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useState, useContext } from "react";
-import { AppContext } from "./AppContext.js";
+import { useState } from "react";
+import './AppCard.css'
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  IconButton,
+  styled,
+  Collapse,
+  Typography
+} from "@mui/material";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,117 +23,43 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard(appObj) {
-
+export default function AppCard({ app, appicon, appiconalt }) {
   const [expanded, setExpanded] = useState(false);
 
-  const { favorites, isFav, setIsFav, addFavorite, removeFavorite } = useContext(AppContext);
-
-  let pokemonObj = pokeObj.pokemon;
-  let spritesUrl = pokemonObj.sprites.front_default;
-  let pokeName = pokemonObj.name;
-  pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
-  let pokeId = pokemonObj.id;
-  let pokeMoves = [];
-  for (let e = 0; e < pokemonObj.moves.length; e++) {
-    pokeMoves.push(pokemonObj.moves[e].move.name);
-  }
-  let pokeType = pokemonObj.types[0].type.name;
-  let pokeWeight = pokemonObj.weight;
-  let pokeHeight = pokemonObj.height;
-
-  let dataObj = {
-    sprite: spritesUrl,
-    name: pokeName,
-    id: pokeId,
-    moves: pokeMoves,
-    type: pokeType,
-    weight: pokeWeight,
-    height: pokeHeight,
-  };
-
-  if (dataObj.id < 10) {
-    dataObj.id = `0` + `${dataObj.id}`;
-  }
-  if (dataObj.id < 100) {
-    dataObj.id = `0` + `${dataObj.id}`;
-  }
-
-  function handleChange() {
-    if (favorites.some(e => e.name === pokemonObj.name)) {
-      removeFavorite(pokemonObj);
-    } else {
-      addFavorite(pokemonObj);
-    }
-  }
-
-  function handleExpandClick() {
+  const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  // let permissions = user.group_full
-
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[200] }} aria-label="recipe">
-            {dataObj.id}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={`${dataObj.name}`}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${dataObj.id}.png`}
-        alt="Pokemon Image"
-      />
+    <Card variant="outlined" className = 'card'>
+      <CardMedia>
+        <img src={appicon} alt={appiconalt}/>
+      </CardMedia>
       <CardContent>
-        <></>
+        <p>{app.name}</p>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          onClick={() => handleChange()}
-          aria-label="add to favorites">
-          <FavoriteIcon style={{ color: (isFav.includes(pokemonObj.name)) ? "pink" : "lightgray" }} />
-        </IconButton>
+      <CardActions disableSpacing className="action">
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          className="toggle"
         >
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {`ID: ${dataObj.id} `}
+          <Typography>
+            {app.description}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {`Type: ${dataObj.type} `}
+          <Typography>
+            {app.url}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {`Height: ${dataObj.height}`}
+          <Typography>
+            {app.role}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {`Weight: ${dataObj.weight}`}
-          </Typography>
-          <img src={(dataObj.sprite)} alt="sprite" />
-          {dataObj.moves.map((move) => (
-            <div>
-              {(isFav.includes(pokemonObj.name)) ?
-                move : null
-              }
-            </div>
-          ))}
         </CardContent>
       </Collapse>
     </Card>
